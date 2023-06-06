@@ -1,0 +1,23 @@
+#include <bits/stdc++.h>
+
+pair<int,int> missingAndRepeating(vector<int> &A, int n)
+{
+	
+    long long  s_1_to_n = (n*(n+1))/2;
+    long long square_1_to_n = (n*(n+1)*(2*n+1))/6;
+    long long Arraysum=0;
+    long long ArraySquareSum=0;
+    for(int i=0;i<n;i++)
+    {
+        Arraysum+=A[i];
+        ArraySquareSum+=((long long)A[i]*(long long)A[i]);
+    }
+    
+    
+    long long sum = s_1_to_n-Arraysum;
+    long long diff = (square_1_to_n-ArraySquareSum)/sum;
+    long long val1 = (sum+diff)/2;
+    long long val2 = val1-sum;
+    return {(int) val1,(int)val2};
+	
+}
