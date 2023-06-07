@@ -1,0 +1,72 @@
+#include <bits/stdc++.h> 
+int  merge(long long *arr,int n,int low,int mid,int high)
+{
+    int left = low;
+    int right =mid+1;
+    vector<long long >vec;
+    int ans=0;
+    while(left<=mid&&right<=high)
+    {
+        if(arr[left]<=arr[right])
+        {
+            vec.push_back(arr[left]);
+            left++;
+
+        }
+        else
+        {
+            ans+=(mid-left)+1;
+            vec.push_back(arr[right]);
+            right++;
+
+        }
+    }
+
+    while(left<=mid)
+    {
+       
+        vec.push_back(arr[left]);
+        left++;
+    }
+    while(right<=high)
+    {
+        vec.push_back(arr[right]);
+        right++;
+    }
+
+    for(int i=low;i<=high;i++)
+    {
+        arr[i] = vec[i-low];
+    }
+    return ans;
+}
+
+int solve(long long *arr,int n,int low,int high)
+{
+    int ans=0;
+   
+    if(low<high)
+    {
+        int mid = low+(high-low)/2;
+        ans+=solve(arr,n,low,mid);
+        ans+=solve(arr,n,mid+1,high);
+        ans+=merge(arr,n,low,mid,high);
+    }
+    return ans;
+}
+long long getInversions(long long *arr, int n){
+    int ans=0;
+    return solve(arr,n,0,n-1);
+    // for(int i=0;i<n;i++)
+    // {
+    //     cout<<arr[i]<<" ";
+    // }
+    
+
+    
+
+    
+}
+
+
+
