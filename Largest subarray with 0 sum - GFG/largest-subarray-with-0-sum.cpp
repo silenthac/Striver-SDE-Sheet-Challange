@@ -19,10 +19,10 @@ class Solution{
         int i;
         for( i=0;i<n;i++)
         { sum+=A[i];
-        if(sum ==0)
-        {
-            len =i+1;
-        }
+        // if(sum ==0)
+        // {
+        //     len =i+1;
+        // }
         
         
             if(mp.find(sum)!=mp.end())
