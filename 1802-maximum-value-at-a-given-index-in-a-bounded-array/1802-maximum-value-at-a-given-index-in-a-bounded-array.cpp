@@ -66,9 +66,9 @@ public:
         int rightcount = n-index-1;
         
         int low=1;
-        int high = maxSum;
+        int high = maxSum+1;
         int ans;
-        while(low<=high)
+        while(high-low>1)
         {
             long long  mid = low+(high-low)/2;
             long long findleftSum = solve(leftcount,mid-1);
@@ -77,17 +77,17 @@ public:
             if(totalsum<=maxSum)
             {
                 ans =mid;
-                low =mid+1;
+                low =mid;
             }
             else
             {
-                high =mid-1;
+                high =mid;
             }
             
             
            
         }
-        return ans;
+        return low;
         
         
         
