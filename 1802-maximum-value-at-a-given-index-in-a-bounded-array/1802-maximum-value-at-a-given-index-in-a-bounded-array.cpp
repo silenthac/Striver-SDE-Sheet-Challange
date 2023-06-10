@@ -67,7 +67,7 @@ public:
         
         int low=1;
         int high = maxSum+1;
-        int ans;
+        int ans=1;
         while(high-low>1)
         {
             long long  mid = low+(high-low)/2;
@@ -87,7 +87,7 @@ public:
             
            
         }
-        return low;
+        return ans;
         
         
         
