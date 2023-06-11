@@ -1,41 +1,28 @@
 class Solution {
 public:
     int longestSemiRepetitiveSubstring(string s) {
-        int n =s.size();
-        vector<int>dp(s.size()+1,-1);
+        int i=0;
+        int j=0;
+        int n = s.size();
         int ans=0;
-        solve(0,s,ans,dp);
-        return ans;
-        
-    }
-    
-    
-    void solve(int i,string s,int &ans,vector<int>&dp)
-    {
-        if(i==s.size())
-            return;
-        
-        if(dp[i]!=-1){
-            ans =  max(dp[i],ans);
-            return;
-        }
-        
-        
-        
-        for(int ind=i;ind<s.size();ind++)
+        while(j<n)
         {
-            if(check(s.substr(i,ind-i+1)))
+            if(check(s.substr(i,j-i+1)))
             {
-                ans = max(ans,ind-i+1);
-                dp[i] =max(ans,dp[i]);
+                ans = max(ans,j-i+1);
+                j++;
                     
             }
-            
-            solve(ind+1,s,ans,dp);
-           
+            else
+            {
+                i++;
+            }
         }
+        return ans;
+        
+        
     }
-
+    
     
     bool check(string s)
     {
@@ -47,10 +34,11 @@ public:
                 count++;
             }
         }
-        
         if(count<=1)
-            return true;
+            return  true;
         else
+        {
             return false;
+        }
     }
 };
