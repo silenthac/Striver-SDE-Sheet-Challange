@@ -12,33 +12,30 @@ public:
         
         ListNode* tempheadA = headA;
         ListNode* tempheadB = headB;
-        while(true)
+        while(tempheadA!=tempheadB)
         {
-            if(tempheadA==NULL&&tempheadB==NULL)
-                return NULL;
+//             if(tempheadA==NULL&&tempheadB==NULL)
+//                 return NULL;
             
-           else if(tempheadA==tempheadB)
-            {
-                return tempheadA;
-            }
-            else if(tempheadA==NULL)
-            {
-                tempheadA = headB;
-            }
+//            else if(tempheadA==tempheadB)
+//             {
+//                 return tempheadA;
+//             }
+//             else if(tempheadA==NULL)
+//             {
+//                 tempheadA = headB;
+//             }
             
-            else if(tempheadB==NULL)
-            {
-                tempheadB = headA;
-            }
+//             else if(tempheadB==NULL)
+//             {
+//                 tempheadB = headA;
+//             }
             tempheadA = tempheadA->next;
             tempheadB = tempheadB->next;
             if(tempheadA==NULL&&tempheadB==NULL)
                 return NULL;
             
-           else if(tempheadA==tempheadB)
-            {
-                return tempheadA;
-            }
+           
             else if(tempheadA==NULL)
             {
                 tempheadA = headB;
@@ -49,6 +46,7 @@ public:
                 tempheadB = headA;
             }
         }
+        return tempheadA;
         
         
     }
