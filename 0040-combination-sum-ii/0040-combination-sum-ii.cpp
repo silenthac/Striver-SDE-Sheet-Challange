@@ -30,9 +30,11 @@ public:
               continue;
           }
           temp.push_back(nums[index]);
+          target = target-nums[index];
           
-          solve(index+1,nums,target-nums[index],temp);
+          solve(index+1,nums,target,temp);
           temp.pop_back();
+          target =target+nums[index];
           
           
       }
