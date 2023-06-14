@@ -23,21 +23,19 @@ public:
         {
             return;
         }
-      for(int index = i;index<nums.size();index++)
-      {
-          if(index>i&&nums[index]==nums[index-1])
-          {
-              continue;
-          }
-          temp.push_back(nums[index]);
-          target = target-nums[index];
-          
-          solve(index+1,nums,target,temp);
-          temp.pop_back();
-          target =target+nums[index];
+        
+        temp.push_back(nums[i]);
+        solve(i+1,nums,target-nums[i],temp);
+        temp.pop_back();
+        while(i+1<nums.size()&&nums[i]==nums[i+1])
+        {
+            i++;
+        }
+        solve(i+1,nums,target,temp);
+     
           
           
-      }
+      
         
        
         
