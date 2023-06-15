@@ -1,0 +1,41 @@
+#include <bits/stdc++.h> 
+
+
+
+void solve(int index,string s,unordered_map<string,int>&mp,vector<string>&ans,vector<string>&temp)
+{
+    if(index==s.size())
+    {
+        string str ="";
+        for(auto it:temp)
+        {
+            str= str+it+" ";
+
+        }
+        ans.push_back(str);
+    }
+
+    for(int i=index;i<s.size();i++)
+    {
+        string part = s.substr(index,i-index+1);
+        if(mp.find(part)!=mp.end())
+        {
+            temp.push_back(part);
+            solve(i+1,s,mp,ans,temp);
+            temp.pop_back();
+        }
+    }
+}
+vector<string> wordBreak(string &s, vector<string> &dictionary)
+{
+    unordered_map<string,int>mp;
+    for(auto it:dictionary)
+    {
+        mp[it]++;
+    }
+    vector<string>ans;
+    vector<string>temp;
+    solve(0,s,mp,ans,temp);
+    return ans;
+
+}
