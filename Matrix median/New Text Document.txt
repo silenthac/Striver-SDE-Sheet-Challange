@@ -1,0 +1,72 @@
+int countLessOrEqual(vector<int>vec,int val)
+{
+    
+    int low =0;
+    int high  =vec.size()-1;
+    while(low<=high)
+    {
+        int mid =  low+(high-low)/2;
+        if(vec[mid]<=val)
+        {
+            low =mid+1;
+        }
+        else
+        {
+            high =mid-1;
+        }
+        
+    }
+    return low;
+    
+    
+    
+    
+    
+}
+
+
+
+
+
+int Solution::findMedian(vector<vector<int> > &A) {
+    
+    int m =A.size();
+    int n  =  A[0].size();
+    int mini = INT_MAX;;
+    int maxi=0;
+   for(int i=0;i<m;i++)
+   {
+       mini = min(A[i][0],mini);
+       maxi =max(A[i][n-1],maxi);
+   }
+   
+   int low =mini;
+   int high = maxi;
+   while(low<=high)
+   {
+       int count=0;
+       int mid = low+(high-low)/2;
+       
+       for(int i=0;i<m;i++)
+       {
+           count+=countLessOrEqual(A[i],mid);
+           //count+=countSmallerThanMid(A[i],mid);
+       }
+       
+       if(count>(m*n)/2)
+       {
+           high =mid-1;
+       }
+       else
+       
+       {
+           low =mid+1;
+       }
+       
+       
+   }
+   return low;
+   
+    
+    
+}
