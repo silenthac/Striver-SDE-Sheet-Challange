@@ -2,15 +2,16 @@ class Solution {
 public:
     vector<vector<int>>ans;
     vector<vector<int>> permute(vector<int>& nums) {
-        vector<bool>visited(nums.size()+1,false);
+       // vector<bool>visited(nums.size()+1,false);
+        unordered_map<int,int>mp;
         vector<int>temp;
-        solve(0,nums,visited,temp);
+        solve(0,nums,mp,temp);
         return ans;
         
     }
     
     
-    void solve(int index,vector<int>&nums,vector<bool>&visited,vector<int>&temp)
+    void solve(int index,vector<int>&nums,unordered_map<int,int>&mp,vector<int>&temp)
     {
         if(temp.size()==nums.size())
         {
@@ -21,13 +22,13 @@ public:
         
         for(int i=0;i<nums.size();i++)
         {
-            if(visited[i]==false)
+            if(mp.find(nums[i])==mp.end())
             {
-                temp.push_back(nums[i]);
-                visited[i] =true;
-                solve(i+1,nums,visited,temp);
+               temp.push_back(nums[i]);
+                mp[nums[i]]++;
+                solve(i+1,nums,mp,temp);
                 temp.pop_back();
-                visited[i]=false;
+                mp.erase(nums[i]);
             }
         }
     }
