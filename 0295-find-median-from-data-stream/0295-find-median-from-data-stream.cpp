@@ -31,7 +31,7 @@ public:
             left.pop();
         }
         
-       else  if(right.size()>left.size()+1)
+         if(right.size()>left.size()+1)
         {
             left.push(right.top());
             right.pop();
