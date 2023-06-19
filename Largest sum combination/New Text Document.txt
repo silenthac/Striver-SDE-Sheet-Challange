@@ -1,0 +1,50 @@
+vector<int> Solution::solve(vector<int> &A, vector<int> &B, int C) {
+    priority_queue<pair<int,pair<int,int>>>pq;
+    set<pair<int,int>>st;
+    sort(A.begin(),A.end(),greater<int>());
+    sort(B.begin(),B.end(),greater<int>());
+    vector<int>vec;
+    int ele = A[0]+B[0];
+    pq.push({ele,{0,0}});
+    st.insert({0,0});
+    while(C--)
+    {
+        auto top =pq.top();
+        pq.pop();
+        int index1 = top.second.first;
+        int index2 = top.second.second;
+        vec.push_back(top.first);
+        
+        if(index1+1<A.size()&&st.find({index1+1,index2})==st.end())
+        {
+             ele = A[index1+1]+B[index2];
+             pq.push({ele,{index1+1,index2}});
+             st.insert({index1+1,index2});
+        }
+        
+        if(index2+1<B.size()&&st.find({index1,index2+1})==st.end())
+        {
+            ele = A[index1]+B[index2+1];
+            pq.push({ele,{index1,index2+1}});
+            st.insert({index1,index2+1});
+        }
+        
+        
+        
+    }
+    return vec;
+    
+    
+    
+    
+    
+    
+    
+   
+    
+    
+   
+    
+}
+
+//In this question basically we havr to find those combination whose sum is maximum in two arrays we can do in brute force by checking with each and every element and then sort and pick largest combination so we can do one  thing we can sort array and we know we have to take  last index of both arrays as these pair will gonna have largest sum ut we  dont  know other than those so for that we will try to take those pair which  has largest  sum for this we can use priortity queue of pair taking sum of index as first and take max priority_queue so that largest sum pair will be in front and  stop when we get our desired size
