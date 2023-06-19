@@ -1,0 +1,37 @@
+#include <bits/stdc++.h>
+
+void solve(int ele,stack<int>&stk)
+{
+	if(stk.empty()||stk.top()<=ele)
+	{
+		stk.push(ele);
+		return;
+	}
+
+	int target =stk.top();
+	stk.pop();
+	solve(ele,stk);
+	stk.push(target);
+}
+void sortStack(stack<int> &stk)
+{
+
+	if(stk.size()==1)
+	return;
+	int ele = stk.top();
+	stk.pop();
+	sortStack(stk);
+
+	if(ele>=stk.top())
+	{
+		stk.push(ele);
+	}
+	else
+	{
+		solve(ele,stk);
+
+	}
+	return;
+
+	
+}
