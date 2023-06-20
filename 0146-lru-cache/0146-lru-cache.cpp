@@ -66,62 +66,38 @@ public:
     }
     
     void put(int key, int value) {
-//         if(cap==mp.size())
-//         {
-//             Node* delNode = tail->prev;
-//             mp.erase(delNode->key);
-//             deleteNode(delNode);
-//             addNode(new Node(key,value));
-//           mp[key] = head->next;
+       
+         if(mp.find(key)!=mp.end())
+        {
+            Node*add = mp[key];
+            mp.erase(key);
+            deleteNode(add);  
+            addNode(new Node(key,value));
+        mp[key] = head->next;
+        }
+        else if(cap==mp.size())
+        {
+            Node* delNode = tail->prev;
+            mp.erase(delNode->key);
+            deleteNode(delNode);
+            addNode(new Node(key,value));
+          mp[key] = head->next;
             
             
-//         }
-//         else if(mp.find(key)!=mp.end())
-//         {
-//             Node*add = mp[key];
-//             mp.erase(key);
-//             deleteNode(add);  
-//             addNode(new Node(key,value));
-//         mp[key] = head->next;
-//         }
+        }
         
-//         else{
-//        addNode(new Node(key,value));
-//         mp[key] = head->next;
-//     }
+        else{
+       addNode(new Node(key,value));
+        mp[key] = head->next;
+    }
        
         
         
-//     }
+    }
         
 
-        if(mp.find(key)!=mp.end())
-        {
-            Node* add = mp[key];
-            mp.erase(key);
-            deleteNode(add);
-            
-            addNode(new Node(key,value));
-            mp[key] = head->next;
-        }
-
-           else if(mp.size()==cap)
-            {
-                int key1 = tail->prev->key;
-                mp.erase(key1);
-                deleteNode(tail->prev);
-                 addNode(new Node(key,value));
-                mp[key] = head->next;
-
-               
-            }
-            else{
-                 addNode(new Node(key,value));
-                mp[key] = head->next;
-
-
-            }
-    }
+        
+    
 };
 
 /**
