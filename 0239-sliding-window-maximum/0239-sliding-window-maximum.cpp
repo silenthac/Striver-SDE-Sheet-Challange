@@ -22,10 +22,10 @@ public:
                 
                 vec.push_back(pq.top().first);
                 i++;
-                 if(j<nums.size()){
+                 
                  pq.push({nums[j],j});
                 j++;
-                 }
+                 
                  
                 
 
