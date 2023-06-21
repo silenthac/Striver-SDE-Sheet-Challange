@@ -1,0 +1,37 @@
+#include <bits/stdc++.h> 
+vector<int> maxMinWindow(vector<int> a, int n) {
+    vector<int>res;
+    
+    for(int k=1;k<=n;k++)
+    {
+        priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>>pq;
+        
+        int i=0;
+        int j=0;
+        int temp=INT_MIN;
+        while(j<n)
+        {
+            pq.push({a[j],j});
+            if(j-i+1<k)
+            {
+                j++;
+            }
+            else if(j-i+1==k)
+            {
+                while(!pq.empty()&&pq.top().second<i)
+                {
+                    pq.pop();
+                }
+                temp = max(temp,pq.top().first);
+               
+                i++;
+                // pq.push({a[j],j});
+                // j++;
+            }
+        }
+
+       
+        res.push_back(temp);
+    }
+    return res;
+}
