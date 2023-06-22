@@ -6,8 +6,10 @@ public:
         
         for(int g=0;g<s.size();g++)
         {
+            int i=0;
+            int j=g;
             
-            for(int i=0,j=g;j<s.size();i++,j++)
+            while(j<s.size())
             {
                 if(g==0)
                 {
@@ -48,6 +50,8 @@ public:
                 
                 if(dp[i][j]==true)
                     count++;
+                
+                i++;j++;
                     
                      
             }
