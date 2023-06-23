@@ -4,7 +4,7 @@ public:
          vector<vector<int>>dp(s.size(),vector<int>(s.size()));
         int count=0;
         int ans=0;
-        string  res="00";
+        string  res="";
         
         for(int g=0;g<s.size();g++)
         {
