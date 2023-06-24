@@ -1,0 +1,50 @@
+class Solution
+{
+	public:
+	
+	void solve(int node,vector<int>adj[],vector<bool>&visited,stack<int>&stk)
+	{
+	    visited[node] =true;
+	    
+	    for(auto it:adj[node])
+	    {
+	        if(!visited[it])
+	        {
+	            solve(it,adj,visited,stk);
+	        }
+	    }
+	    stk.push(node);
+	}
+	
+	
+	
+	 
+	vector<int> topoSort(int V, vector<int> adj[]) 
+	{
+	    stack<int>stk;
+	    vector<bool>visited(V,false);
+	    
+	    
+	    for(int i=0;i<V;i++)
+	    {
+	        if(!visited[i])
+	        {
+	            solve(i,adj,visited,stk);
+	        }
+	    }
+	    
+	    
+	    
+	    vector<int>ans;
+	    
+	    while(!stk.empty())
+	    {
+	      //  cout<<stk.top();
+	        ans.push_back(stk.top());
+	        stk.pop();
+	    }
+	   
+	    return ans;
+	   
+	}
+};
