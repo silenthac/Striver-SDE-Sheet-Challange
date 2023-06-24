@@ -1,0 +1,59 @@
+class Solution {
+public:
+    
+    //if you will find cycle in the course then you cant take course then  return false
+    bool canFinish(int numCourses, vector<vector<int>>& arr) {
+      
+        vector<int>adj[numCourses];
+        
+        for(int i=0;i<arr.size();i++)
+        {
+            adj[arr[i][1]].push_back(arr[i][0]);
+        }
+        
+        
+        vector<bool>visited(numCourses,false);
+        vector<bool>tempvisited(numCourses,false);
+        
+        for(int i=0;i<numCourses;i++)
+        {
+            bool iscycle=false;
+           
+            if(!visited[i])
+            {
+                
+                solve(i,adj,visited,iscycle,tempvisited);
+                if(iscycle==true)
+                    return false;
+                
+            }
+        }
+        
+        
+        return true;
+        
+    }
+    
+    void solve(int node,vector<int>adj[],vector<bool>&visited,bool &iscycle,vector<bool>&tempvisited)
+    {
+        
+        visited[node]=true;
+        tempvisited[node]=true;
+        
+        
+        for(auto it:adj[node])
+        {
+            if(!visited[it])
+            {
+                solve(it,adj,visited,iscycle,tempvisited);
+            }
+            else if(tempvisited[it])
+            {
+               iscycle = true;
+                return;
+            }
+        }
+        tempvisited[node] =false;
+        
+    }
+};

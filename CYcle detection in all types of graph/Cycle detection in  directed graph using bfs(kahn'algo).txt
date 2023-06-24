@@ -1,0 +1,55 @@
+class Solution {
+public:
+    
+    //if you will find cycle in the course then you cant take course then  return false
+    //for directed graph we have to use two visited array 
+    bool canFinish(int numCourses, vector<vector<int>>& arr) {
+      
+        vector<int>adj[numCourses];
+        vector<int>indegree(numCourses,0);
+        
+        for(int i=0;i<arr.size();i++)
+        {
+            adj[arr[i][1]].push_back(arr[i][0]);
+            indegree[arr[i][0]]++;
+            
+        }
+        
+        queue<int>pq;
+        for(int i=0;i<indegree.size();i++)
+        {
+            if(indegree[i]==0)
+            {
+                pq.push(i);
+            }
+        }
+        
+        vector<int>ans;
+        
+        while(!pq.empty())
+        {
+            auto top =pq.front();
+            pq.pop();
+            ans.push_back(top);
+            
+            for(auto it:adj[top])
+            {
+                indegree[it]--;
+                
+                if(indegree[it]==0)
+                {
+                    pq.push(it);
+                }
+            }
+        }
+        
+        return ans.size()==numCourses;
+    }
+        
+        
+       
+        
+      
+    
+
+};
