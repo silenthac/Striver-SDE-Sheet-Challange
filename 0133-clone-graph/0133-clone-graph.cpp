@@ -19,29 +19,42 @@ public:
 };
 */
 
+
+//clone graph using BFS
 class Solution {
-    unordered_map<Node*,Node*>mp;
 public:
     Node* cloneGraph(Node* node) {
         if(node==NULL)
             return NULL;
+        unordered_map<Node*,Node*>mp;
+        queue<Node*>pq;
+        pq.push(node);
+        Node* res = new Node(node->val);
+        mp[node] =res;
         
-        if(mp.find(node)!=mp.end())
-            return mp[node];
-        
-        Node* temp = new Node(node->val);
-        
-        
-        mp[node] =temp;
-        
-        
-        for(auto it:node->neighbors)
+        while(!pq.empty())
         {
-            Node* temp1 = cloneGraph(it);
-            mp[node]->neighbors.push_back(temp1);
+            auto top= pq.front();
+            pq.pop();
             
+            for(auto it:top->neighbors)
+            {
+                if(mp.find(it)!=mp.end())
+                {
+                   mp[top]->neighbors.push_back(mp[it]); 
+                }
+                else
+                {
+                    Node* temp =new Node(it->val);
+                    mp[it] =temp;
+                    mp[top]->neighbors.push_back(temp);
+                    pq.push(it);
+                }
+            }
         }
-        return mp[node];
+        
+        return res;
+        
         
     }
 };
