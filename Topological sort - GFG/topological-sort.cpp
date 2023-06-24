@@ -6,51 +6,46 @@ using namespace std;
 class Solution
 {
 	public:
-	
-	void solve(int node,vector<int>adj[],vector<bool>&visited,stack<int>&stk)
-	{
-	    visited[node] =true;
-	    
-	    for(auto it:adj[node])
-	    {
-	        if(!visited[it])
-	        {
-	            solve(it,adj,visited,stk);
-	        }
-	    }
-	    stk.push(node);
-	}
-	
-	
-	
-	 
+	//topological sorting using BFS 
 	vector<int> topoSort(int V, vector<int> adj[]) 
 	{
-	    stack<int>stk;
-	    vector<bool>visited(V,false);
-	    
+	    queue<int>pq;
+	    vector<int>indegree(V,0);
 	    
 	    for(int i=0;i<V;i++)
 	    {
-	        if(!visited[i])
+	        for(auto it: adj[i])
 	        {
-	            solve(i,adj,visited,stk);
+	            indegree[it]++;
 	        }
 	    }
 	    
-	    
-	    
+	    for(int i=0;i<indegree.size();i++)
+	    {
+	        if(indegree[i]==0)
+	        {
+	            pq.push(i);
+	        }
+	    }
 	    vector<int>ans;
 	    
-	    while(!stk.empty())
+	    while(!pq.empty())
 	    {
-	      //  cout<<stk.top();
-	        ans.push_back(stk.top());
-	        stk.pop();
+	        auto  top =pq.front();
+	        pq.pop();
+	        
+	        ans.push_back(top);
+	        
+	        for(auto it:adj[top])
+	        {
+	            indegree[it]--;
+	            if(indegree[it]==0)
+	            {
+	                pq.push(it);
+	            }
+	        }
 	    }
-	   
 	    return ans;
-	   
 	}
 };
 
