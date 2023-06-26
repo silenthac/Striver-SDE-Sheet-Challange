@@ -21,7 +21,7 @@ public:
         
         if(l2==NULL)
             return l1;
-        if(list1->val<=list2->val)
+        if(l1->val<=l2->val)
         { 
             res=l1;
             
