@@ -1,32 +1,30 @@
-//We can  do it in brute force manner simply check wheher the prevous all element are smaller than current element or not if yes then taken max of those previous element
-
 class Solution {
 public:
     int lengthOfLIS(vector<int>& nums) {
-        int n = nums.size();
-       
-        vector<int>vec(n,1);
+        vector<vector<int>>dp(nums.size(),vector<int>(nums.size()+1,-1));
         
-        for(int i=0;i<n;i++)
+        return solve(0,-1,nums,dp);
+        
+    }
+    
+    
+    int solve(int currind,int prevInd,vector<int>&nums,vector<vector<int>>&dp)
+    {
+        if(currind==nums.size())
+            return 0;
+        
+        if(dp[currind][prevInd+1]!=-1)
+            return dp[currind][prevInd+1];
+        
+        
+        int taken=0;
+        if(prevInd==-1||nums[currind]>nums[prevInd])
         {
-            int maxi =0;
-            
-            for(int j=0;j<i;j++)
-            {
-                if(nums[i]>nums[j])
-                {
-                    maxi =max(maxi,vec[j]);
-                }
-            }
-            
-            vec[i]= maxi+vec[i];
+            taken =  1+solve(currind+1,currind,nums,dp);
         }
         
-        return *max_element(vec.begin(),vec.end());
-        
-        
-        
-        
+        int notaken =  solve(currind+1,prevInd,nums,dp);
+        return  dp[currind][prevInd+1] = max(taken,notaken);
         
     }
 };
