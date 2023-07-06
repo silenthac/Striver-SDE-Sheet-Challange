@@ -1,13 +1,30 @@
 class Solution {
 public:
     bool increasingTriplet(vector<int>& nums) {
-         vector<int> res;
-    for(int i=0; i<nums.size(); i++) {
-        auto it = std::lower_bound(res.begin(), res.end(), nums[i]);
-        if(it==res.end()) res.push_back(nums[i]);
-        else *it = nums[i];
-    }
-    return res.size()>=3;
+        int n  =nums.size();
+        int first = INT_MAX;
+        int second =INT_MAX; 
+        for(int i=0;i<n;i++)
+        {
+            if(first>=nums[i])
+            {
+                first =nums[i];
+            }
+            else if(second>=nums[i])
+            {
+                second = nums[i];
+            }
+            else{
+                
+                
+                return true;
+            }
+            
+            
+            
+        }
+        return false;
+    
         
     }
 };
