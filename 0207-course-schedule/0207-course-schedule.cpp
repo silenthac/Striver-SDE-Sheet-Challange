@@ -2,58 +2,54 @@ class Solution {
 public:
     
     //if you will find cycle in the course then you cant take course then  return false
+    //for directed graph we have to use two visited array 
     bool canFinish(int numCourses, vector<vector<int>>& arr) {
       
         vector<int>adj[numCourses];
+        vector<int>indegree(numCourses,0);
         
         for(int i=0;i<arr.size();i++)
         {
             adj[arr[i][1]].push_back(arr[i][0]);
+            indegree[arr[i][0]]++;
+            
         }
         
-        
-        vector<bool>visited(numCourses,false);
-        vector<bool>tempvisited(numCourses,false);
-        
-        for(int i=0;i<numCourses;i++)
+        queue<int>pq;
+        for(int i=0;i<indegree.size();i++)
         {
-            bool iscycle=false;
-           
-            if(!visited[i])
+            if(indegree[i]==0)
             {
-                
-                solve(i,adj,visited,iscycle,tempvisited);
-                if(iscycle==true)
-                    return false;
-                
+                pq.push(i);
             }
         }
         
+        vector<int>ans;
         
-        return true;
+        while(!pq.empty())
+        {
+            auto top =pq.front();
+            pq.pop();
+            ans.push_back(top);
+            
+            for(auto it:adj[top])
+            {
+                indegree[it]--;
+                
+                if(indegree[it]==0)
+                {
+                    pq.push(it);
+                }
+            }
+        }
         
+        return ans.size()==numCourses;
     }
+        
+        
+       
+        
+      
     
-    void solve(int node,vector<int>adj[],vector<bool>&visited,bool &iscycle,vector<bool>&tempvisited)
-    {
-        
-        visited[node]=true;
-        tempvisited[node]=true;
-        
-        
-        for(auto it:adj[node])
-        {
-            if(!visited[it])
-            {
-                solve(it,adj,visited,iscycle,tempvisited);
-            }
-            else if(tempvisited[it])
-            {
-               iscycle = true;
-                return;
-            }
-        }
-        tempvisited[node] =false;
-        
-    }
+
 };
