@@ -10,21 +10,17 @@ public:
         sort(intervals.begin(),intervals.end(),comp);
         
         int i=0;
-        int count=-1;
-        for(int j=0;j<intervals.size();j++)
+        int count=1;
+        for(int j=1;j<intervals.size();j++)
         {
-            if(intervals[j][0]<intervals[i][1])
+            if(intervals[j][0]>=intervals[i][1])
             {
                 count++;
-                
-            }
-            else
-            {
                 i=j;
             }
         }
         
-    return count;
+    return n-count;
         
     }
 };
