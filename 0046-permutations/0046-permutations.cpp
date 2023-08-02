@@ -2,36 +2,36 @@ class Solution {
 public:
     vector<vector<int>>ans;
     vector<vector<int>> permute(vector<int>& nums) {
-       // vector<bool>visited(nums.size()+1,false);
-        unordered_map<int,int>mp;
+        int n =nums.size();
         vector<int>temp;
-        solve(0,nums,mp,temp);
+        unordered_set<int>st;
+        solve(nums,n,temp,st);
         return ans;
+        
         
     }
     
     
-    void solve(int index,vector<int>&nums,unordered_map<int,int>&mp,vector<int>&temp)
+    void solve(vector<int>&nums,int n,vector<int>&temp,unordered_set<int>&st)
     {
-        if(temp.size()==nums.size())
+        
+        if(temp.size()==n)
         {
             ans.push_back(temp);
             return;
         }
-        
-        
         for(int i=0;i<nums.size();i++)
         {
-            if(mp.find(nums[i])==mp.end())
+            if(st.find(nums[i])==st.end())
             {
-               temp.push_back(nums[i]);
-                mp[nums[i]]++;
-                solve(i+1,nums,mp,temp);
+                st.insert(nums[i]);
+                temp.push_back(nums[i]);
+                solve(nums,n,temp,st);
+                st.erase(nums[i]);
                 temp.pop_back();
-                mp.erase(nums[i]);
             }
         }
     }
-        
-     
+    
+    
 };
