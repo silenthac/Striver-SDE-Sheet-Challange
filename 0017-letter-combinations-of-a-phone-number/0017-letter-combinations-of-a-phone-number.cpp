@@ -35,7 +35,7 @@ public:
         
         for(int i = index;i<digits.size();i++)
         {
-          int t =  int(digits[i]) - 48;
+          int t =  digits[i]-'0';
             for(auto it:mp[t])
             {
                 solve(i+1,digits,mp,temp+it);
