@@ -1,46 +1,26 @@
 class Solution {
 public:
-    
-    
-    bool isGood(string s,string temps)
-    {
-        int tempn = temps.size();
-        int n = s.size();
-        int count = n/tempn;
-        string newtemp ="";
-        while(count--)
-        {
-            newtemp+=temps;
-           
-        }
-        
-        
-        
-        return newtemp==s;
-    }
     bool repeatedSubstringPattern(string s) {
         int n = s.size();
-        // if(n%2)
-        // {
-        //     return false;
-        // }
-        int i=0;
-        int j=0;
-        while(j<n)
+        
+        for(int i=1;i<=n/2;i++)
         {
-            string temps = s.substr(i,j-i+1);
-           
-            
-            if(temps==s)
-            {
-                return false;
-            }
-            if(isGood(s,temps))
-            {
-                return true;
+
                 
-            }
-            j++;
+                string temps = s.substr(0,i);
+                
+                string reps ="";
+                for(int j=0;j<n/i;j++)
+                {
+                    reps+=temps;
+                }
+                
+                if(reps==s)
+                {
+                    return true;
+                }
+            
+            
         }
         return false;
         
