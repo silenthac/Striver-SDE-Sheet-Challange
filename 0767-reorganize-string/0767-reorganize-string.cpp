@@ -49,20 +49,19 @@ public:
             
         }
         
-        if(pq.empty())
-        {
-            return ans;
-        }
+        // if(pq.empty())
+        // {
+        //     return ans;
+        // }
         
-        if(pq.top().first==1)
+        if(pq.top().first==1&&!pq.empty())
         {
             ans+=pq.top().second;
             return ans;
         }
-        else
-        {
-            return "";
-        }
+        
+        return ans;
+        
         
        
         
