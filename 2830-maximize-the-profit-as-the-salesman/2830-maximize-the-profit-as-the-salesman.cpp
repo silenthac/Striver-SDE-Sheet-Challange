@@ -1,24 +1,24 @@
 class Solution {
 public:
     
-    static bool comp(vector<int>a,vector<int>b)
-    {
-        if(a[0]<b[0])
-        {
-            return true;
-        }
+//     static bool comp(vector<int>a,vector<int>b)
+//     {
+//         if(a[1]<b[1])
+//         {
+//             return true;
+//         }
         
-        else if(a[0]==b[0])
-        {
-            if(a[1]<b[1])
-                return true;
-        }
-        return false;
-    }
+//         else if(a[1]==b[1])
+//         {
+//             if(a[0]<b[0])
+//                 return true;
+//         }
+//         return false;
+//     }
     int maximizeTheProfit(int n, vector<vector<int>>& offers) {
         vector<int>dp(offers.size(),-1);
         
-        sort(offers.begin(),offers.end(),comp);
+        sort(offers.begin(),offers.end());
         
         return solve(0,offers,-1,dp);
         
