@@ -11,8 +11,20 @@ public:
         vector<vector<int>>dp(pairs.size()+1,vector<int>(pairs.size()+1,-1));
         
          sort(pairs.begin(),pairs.end(),comp);
+        int count=1;
         
-        return solve(0,pairs,-1,dp);
+        int i=0;
+        for(int j=1;j<n;j++)
+        {
+            if(pairs[i][1]<pairs[j][0])
+            {
+                count++;
+                i=j;
+            }
+        }
+        return count;
+        
+        // return solve(0,pairs,-1,dp);
         
         
         
