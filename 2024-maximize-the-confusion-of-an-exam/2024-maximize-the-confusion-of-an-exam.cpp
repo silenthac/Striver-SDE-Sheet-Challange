@@ -1,51 +1,26 @@
 class Solution {
 public:
-    int maxConsecutiveAnswers(string answerkey, int k) {
-        return max(solve(answerkey,k,'T'),solve(answerkey,k,'F'));
-        
-        
-    }
-    
-    
-    int solve(string nums,int k,char c)
-    {
-         int n =nums.size();
+    int maxConsecutiveAnswers(string nums, int k) {
+        unordered_map<char,int>mp;
         int i=0;
-        int  j=0;
+        int j=0;
+        int n = nums.size();
         int ans=0;
+        int maxfreq=0;
         while(j<n)
         {
-            if(nums[j]==c)
+            mp[nums[j]]++;
+           
+            maxfreq = max(maxfreq,mp[nums[j]]);
+            while((j-i+1)-maxfreq>k)
             {
-                j++;
+                mp[nums[i]]--;
+                i++;
             }
-            else
-            {
-                if(k>0)
-                {
-                    j++;
-                    k--;
-                    
-                }
-                else
-                {
-                    ans =max(ans,j-i);
-                    if(nums[i]==c)
-                    {
-                        i++;
-                    }
-                    else
-                    {
-                        k++;
-                        i++;
-                    }
-                }
-            }
-            
+             ans =  max(ans,j-i+1);
+              j++;
         }
-        ans = max(ans,j-i);
         return ans;
         
     }
-    
 };
