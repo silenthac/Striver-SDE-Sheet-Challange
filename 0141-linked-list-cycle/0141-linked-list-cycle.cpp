@@ -23,10 +23,6 @@ public:
                 return true;
             }
             
-            if(slow==NULL&&fast==NULL)
-            {
-                return false;
-            }
         }
         return false;
         
