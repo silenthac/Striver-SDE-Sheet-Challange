@@ -13,49 +13,38 @@ public:
     }
 };
 */
-//make a map of value and its address
 
 class Solution {
 public:
     Node* copyRandomList(Node* head) {
         unordered_map<Node*,Node*>mp;
-        
-        Node* temp =head;
-        Node* res = new Node(-1);
-        Node*head2=res;
-        
+      Node* temp =head;
+        Node* newNode = new Node(-1);
+        Node* res = newNode;
         
         while(temp!=NULL)
         {
-            
-                res->next = new  Node(temp->val);
-            mp[temp] =res->next;
-                res =res->next;
-                temp =temp->next;
-            
-        }
-        temp =head;
-        head2 =head2->next;
-        Node* ans=head2;
-        while(temp!=NULL)
-        {
-            if(temp->random==NULL)
-            {
-                head2->random =NULL;
-            }
-            else
-            {
-                 head2->random=mp[temp->random];
-            }
-            
-            
-            head2 =head2->next;
+            Node* tempnode = new Node(temp->val);
+            mp[temp]=  tempnode;
+            newNode->next = tempnode;
+            newNode = newNode->next;
             temp =temp->next;
+            
         }
-        return ans;
         
+        temp = head;
+        newNode=res->next;
+        while(temp!=NULL)
+        {
+            newNode->random = mp[temp->random];
+            newNode = newNode->next;
+            temp =temp->next;
+            
+            
+            
+        }
         
-        
+        return res->next;
         
         
     }
