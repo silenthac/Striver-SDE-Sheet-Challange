@@ -53,11 +53,11 @@ public:
             }
         }
         
-        long long sum = (nCr(n,r))%mod;
+        int  sum = (nCr(n,r))%mod;
         
         for(int i=0;i<k;i++)
         {
-            sum= ((sum%mod)*(vec[i]%mod))%mod;
+            sum= 1ll*(1ll*(sum%mod)*(vec[i]%mod))%mod;
         }
         
         return sum;
