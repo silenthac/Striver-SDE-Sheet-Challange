@@ -32,6 +32,7 @@ class Solution {
             if(dp[next]==-1)
             {
                 dp[next] = dp[cur]+1;
+                
                 pq.push(next);
             }
             
