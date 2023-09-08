@@ -9,13 +9,15 @@ public:
             {
                 if(j==0||j==i)
                 {
-                   vec[i].push_back(1);
+                    vec[i].push_back(vec[i-1][0]);
                 }
                 else
                 {
                     vec[i].push_back(vec[i-1][j-1]+vec[i-1][j]);
                 }
+                
             }
+            
         }
         return vec;
         
